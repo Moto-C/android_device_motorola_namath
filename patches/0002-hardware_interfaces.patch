@@ -64,7 +64,13 @@ index a03bbc8..d02fe63 100644
          return nullptr;
 @@ -669,6 +671,7 @@ Return<Status> CameraDevice::open(const sp<ICameraDeviceCallback>& callback) {
      mDeviceCallback = callback;
- 
+#ifdef QTI_CAMERA_DEVICE
+    mQDeviceCallback = vendor::qti::hardware::camera::device::V1_0::IQCameraDeviceCallback::castFrom(callback);
+    if(mQDeviceCallback == nullptr) {
+        ALOGI("could not cast ICameraDeviceCallback to IQCameraDeviceCallback");
+    }
+#endif
+
      if (mDevice->ops->set_callbacks) {
 +        sUser = this;
          mDevice->ops->set_callbacks(mDevice,
