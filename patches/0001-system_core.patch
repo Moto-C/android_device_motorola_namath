@@ -25,11 +25,11 @@ index 28f0b07..7ba8505 100644
  	libhidltransport \
  	libhwbinder \
  	android.hardware.gatekeeper@1.0 \
-+	
+
 +ifeq ($(strip $(BOARD_USE_SOFT_GATEKEEPER)),true)
 +LOCAL_CFLAGS += -DUSE_SOFT_GATEKEEPER
 +endif
- 
++
  LOCAL_STATIC_LIBRARIES := libscrypt_static
  LOCAL_C_INCLUDES := external/scrypt/lib/crypto
 diff --git a/gatekeeperd/gatekeeperd.cpp b/gatekeeperd/gatekeeperd.cpp
@@ -41,7 +41,7 @@ index 61c8804..8e43da9 100644
      GateKeeperProxy() {
          clear_state_if_needed_done = false;
 +#ifdef USE_SOFT_GATEKEEPER
-+    	hw_device = nullptr;
++	hw_device = nullptr;
 +#else
          hw_device = IGatekeeper::getService();
 +#endif
@@ -491,7 +491,7 @@ index 3b27234..d7e0aab 100644
 +extern int ifc_is_up(const char *name, unsigned *isup);
 +extern int ifc_enable_allmc(const char *name);
 +extern int ifc_disable_allmc(const char *name);
-+extern int ifc_reset_connection_by_uid(int uid, int error); 
++extern int ifc_reset_connection_by_uid(int uid, int error);
 +extern int ifc_set_throttle(const char *ifname, int rxKbps, int txKbps);
 +extern int ifc_set_fwmark_rule(const char *ifname, int mark, int add);
 +extern int ifc_set_txq_state(const char *ifname, int state);
