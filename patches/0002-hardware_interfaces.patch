@@ -77,7 +77,7 @@ index a03bbc8..d02fe63 100644
                  sNotifyCb, sDataCb, sDataCbTimestamp, sGetMemory, this);
      }
 diff --git a/sensors/1.0/default/Sensors.cpp b/sensors/1.0/default/Sensors.cpp
-index 1100dd6..c41a744 100644
+index 1100dd6a..c41a7441 100644
 --- a/sensors/1.0/default/Sensors.cpp
 +++ b/sensors/1.0/default/Sensors.cpp
 @@ -95,7 +95,7 @@ Sensors::Sensors()
